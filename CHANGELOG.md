@@ -2,8 +2,7 @@
 
 ## 1.0.1
 
-- Fixed distorted/corrupted history thumbnails
-- Thumbnails now show more of the page instead of aggressively cropping
+- Fixed recent captures thumbnails being a squished mess for full-page screenshots
 - Added "Clear" button to wipe capture history
 - Removed unused dead code
 
