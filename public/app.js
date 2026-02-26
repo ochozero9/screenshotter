@@ -240,12 +240,13 @@ function saveToHistory(url, objectUrl, blob) {
     const canvas = document.createElement('canvas');
     const scale = 200 / img.width;
     canvas.width = 200;
-    canvas.height = Math.round(img.height * scale);
-    // Cap thumbnail height
-    if (canvas.height > 200) canvas.height = 200;
+    const scaledHeight = Math.round(img.height * scale);
+    // Cap thumbnail height — crop from top, don't squish
+    canvas.height = Math.min(scaledHeight, 200);
     const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    const thumbnail = canvas.toDataURL('image/jpeg', 0.6);
+    // Draw at scaled width, full scaled height — canvas clips to its bounds
+    ctx.drawImage(img, 0, 0, canvas.width, scaledHeight);
+    const thumbnail = canvas.toDataURL('image/jpeg', 0.7);
 
     const history = getHistory();
     history.unshift({
