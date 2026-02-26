@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screenshotter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Screenshotter</h1>
+    <p class="subtitle">Full-page, high-res PNG screenshots</p>
+
+    <form id="capture-form">
+      <div class="url-row">
+        <input type="url" id="url-input" placeholder="https://example.com" required autocomplete="url">
+        <button type="submit" id="capture-btn">Capture</button>
+      </div>
+
+      <details id="options-panel">
+        <summary>Options</summary>
+        <div class="options-grid">
+          <div class="option-group">
+            <label>Viewport</label>
+            <div class="preset-row">
+              <button type="button" class="preset" data-width="1920" data-height="1080">Full HD</button>
+              <button type="button" class="preset" data-width="1440" data-height="900">Desktop</button>
+              <button type="button" class="preset" data-width="768" data-height="1024">Tablet</button>
+              <button type="button" class="preset" data-width="375" data-height="812">Mobile</button>
+            </div>
+            <div class="viewport-custom">
+              <input type="number" id="vp-width" value="1440" min="320" max="3840">
+              <span>&times;</span>
+              <input type="number" id="vp-height" value="900" min="320" max="2160">
+            </div>
+          </div>
+
+          <div class="option-group">
+            <label>Scale</label>
+            <div class="radio-row">
+              <label class="radio"><input type="radio" name="scale" value="1"> 1x</label>
+              <label class="radio"><input type="radio" name="scale" value="2" checked> 2x</label>
+              <label class="radio"><input type="radio" name="scale" value="3"> 3x</label>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <label>
+              <input type="checkbox" id="full-page" checked> Full page
+            </label>
+          </div>
+
+          <div class="option-group">
+            <label>
+              <input type="checkbox" id="dark-mode"> Dark mode
+            </label>
+          </div>
+
+          <div class="option-group">
+            <label for="delay-slider">Delay: <span id="delay-value">1.0s</span></label>
+            <input type="range" id="delay-slider" min="0" max="10000" step="500" value="1000">
+          </div>
+
+          <div class="option-group">
+            <label for="wait-selector">Wait for selector</label>
+            <input type="text" id="wait-selector" placeholder=".main-content">
+          </div>
+
+          <div class="option-group full-width">
+            <details>
+              <summary>Custom CSS <span class="hint">hide banners, ads, sticky headers</span></summary>
+              <textarea id="custom-css" rows="4" placeholder="header { display: none; }&#10;.cookie-banner { display: none; }"></textarea>
+            </details>
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <div id="result" class="hidden">
+      <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>Capturing screenshot...</p>
+      </div>
+
+      <div id="error-msg" class="hidden"></div>
+
+      <div id="preview-area" class="hidden">
+        <div id="truncation-warning" class="hidden">
+          Page was taller than 15,000px and was truncated.
+        </div>
+        <div id="login-warning" class="hidden">
+          This looks like a login page. The site may require authentication.
+        </div>
+        <div id="selector-warning" class="hidden">
+          The wait-for selector was not found within 10 seconds. The screenshot was taken without it.
+        </div>
+        <div id="info-bar">
+          <span id="info-dims"></span>
+          <span id="info-size"></span>
+          <span id="info-time"></span>
+        </div>
+        <div id="preview-container">
+          <img id="preview-img" alt="Screenshot preview">
+        </div>
+        <button id="download-btn">Download PNG</button>
+      </div>
+    </div>
+
+    <div id="history-section">
+      <h2>Recent captures</h2>
+      <div id="history-list"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
