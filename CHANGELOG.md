@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+- Fixed distorted/corrupted history thumbnails
+- Thumbnails now show more of the page instead of aggressively cropping
+- Added "Clear" button to wipe capture history
+- Removed unused dead code
+
 ## 1.0.0
 
 - Initial release
