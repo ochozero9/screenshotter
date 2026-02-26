@@ -18,6 +18,7 @@ const delayValue = document.getElementById('delay-value');
 const historyList = document.getElementById('history-list');
 const vpWidth = document.getElementById('vp-width');
 const vpHeight = document.getElementById('vp-height');
+const clearHistoryBtn = document.getElementById('clear-history');
 
 let currentBlob = null;
 let currentFilename = '';
@@ -241,7 +242,7 @@ function saveToHistory(url, objectUrl, blob) {
     canvas.width = 200;
     canvas.height = Math.round(img.height * scale);
     // Cap thumbnail height
-    if (canvas.height > 125) canvas.height = 125;
+    if (canvas.height > 200) canvas.height = 200;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     const thumbnail = canvas.toDataURL('image/jpeg', 0.6);
@@ -277,6 +278,7 @@ function getHistory() {
 
 function renderHistory() {
   const history = getHistory();
+  clearHistoryBtn.classList.toggle('hidden', history.length === 0);
   if (history.length === 0) {
     historyList.innerHTML = '<p class="history-empty">No captures yet</p>';
     return;
@@ -345,6 +347,12 @@ function escapeHtml(str) {
 function escapeAttr(str) {
   return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
+
+// Clear history
+clearHistoryBtn.addEventListener('click', () => {
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+});
 
 // Initial render
 renderHistory();

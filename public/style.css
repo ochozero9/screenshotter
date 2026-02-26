@@ -310,11 +310,32 @@ textarea {
   margin-top: 48px;
 }
 
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
 #history-section h2 {
   font-size: 16px;
   font-weight: 600;
   color: var(--text-muted);
-  margin-bottom: 12px;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.text-btn:hover {
+  color: var(--danger);
+  background: rgba(231, 76, 60, 0.1);
 }
 
 #history-list {
@@ -339,7 +360,8 @@ textarea {
 .history-item img {
   width: 100%;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--surface-2);
   border-radius: 4px;
   margin-bottom: 6px;
 }
