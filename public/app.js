@@ -191,7 +191,6 @@ form.addEventListener('submit', async (e) => {
     selectorWarning.classList.toggle('hidden', !selectorTimeout);
 
     // Login page detection
-    const pageTitle = await getPageTitle(objectUrl);
     const isLoginPage = /log\s*in|sign\s*in|auth/i.test(url);
     loginWarning.classList.toggle('hidden', !isLoginPage);
 
@@ -345,11 +344,6 @@ function escapeHtml(str) {
 
 function escapeAttr(str) {
   return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-}
-
-async function getPageTitle() {
-  // Stub - can't read title from screenshot blob
-  return '';
 }
 
 // Initial render
